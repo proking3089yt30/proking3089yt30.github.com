@@ -1,37 +1,32 @@
+// server.js
+
 const express = require('express');
-const bodyParser = require('body-parser');
 const request = require('request');
-const app = express()
+const apiKey = '53984a0563fb3875b9b3a67fb22e5305'; // Replace with your actual API key
 
-const apiKey = '44d16812e3691418a6c8093caae35a8b';
+const app = express();
 
-app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.set('view engine', 'ejs')
+// Define routes and handle requests
+app.get('/', (req, res) => {
+  res.send('Welcome to the Proking3089yt30 GitHub Server');
+});
 
-app.get('/', function (req, res) {
-  res.render('index', {weather: null, error: null});
-})
+app.get('/data', (req, res) => {
+  const url = `https://api.example.com/data?apiKey=${apiKey}`; // Replace with the actual API endpoint
 
-app.post('/', function (req, res) {
-  let city = req.body.city;
-  let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
-
-  request(url, function (err, response, body) {
-    if(err){
-      res.render('index', {weather: null, error: 'Error, please try again'});
+  // Make a request to the API using the apiKey
+  request(url, (error, response, body) => {
+    if (!error && response.statusCode === 200) {
+      const data = JSON.parse(body);
+      res.json(data);
     } else {
-      let weather = JSON.parse(body)
-      if(weather.main == undefined){
-        res.render('index', {weather: null, error: 'Error, please try again'});
-      } else {
-        let weatherText = `It's ${weather.main.temp} degrees in ${weather.name}!`;
-        res.render('index', {weather: weatherText, error: null});
-      }
+      res.status(response.statusCode).send(error);
     }
   });
-})
+});
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-})
+// Start the server
+const port = 3000; // Replace with your desired port number
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
