@@ -3,7 +3,69 @@
 /* Reset styles */
 html, body {
   margin: 0;
-  padding: 0;
+  padding: 0* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+}
+
+p {
+    text-align: center;
+    font-size: 18px;
+}
+
+#weather-form {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+#city-input {
+    width: 70%;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#submit-button {
+    width: 20%;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: #2196f3;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#weather-result {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: none;
+}
+
+#weather-result p {
+    font-size: 20px;
+    line-height: 1.5;
+}
+
 }
 
 /* Global styles */
